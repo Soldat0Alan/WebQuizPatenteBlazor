@@ -1,0 +1,33 @@
+@page "/quiz-per-argomento"
+@using Patente
+
+<PageTitle>Quiz per argomento</PageTitle>
+
+<h1>Sezione quiz per argomento!</h1>
+
+<p>Usando il menu a tendina scegli l'argomento a tuo piacimento.</p>
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle"type="button"id="dropdownMenuButton"data-bs-toggle="dropdown"aria-expanded="false">
+    Seleziona l'argomento
+</button>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    @foreach (Argomento argomento in listaArgomenti)
+    {
+        <b> <a class="dropdown-item">@argomento.ToString()</a></b>
+       
+    }
+  </div>
+</div>
+    
+
+
+<hr>
+@code{
+    List<Argomento> listaArgomenti;
+    protected override void OnInitialized()
+    {
+        listaArgomenti = GestioneJson.LeggiFileArgomento();
+    }
+}
