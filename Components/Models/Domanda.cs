@@ -28,7 +28,7 @@ namespace Patente
         [JsonPropertyName("theory")]
         public int Teoria {get;  set;}
         
-        [JsonPropertyName("id_chaper")]
+        [JsonPropertyName("id_chapter")]
         public int Id_Capitolo {get;  set;}
 
         [JsonPropertyName("userAnswer")]

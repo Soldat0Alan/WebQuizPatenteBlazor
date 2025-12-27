@@ -1,0 +1,64 @@
+@using Patente
+@using System.Linq
+
+<div class="card p-3 mx-auto" style="max-width:600px;">
+    @if (domandeArgomento.Any())
+    {
+        <h5>Domanda @(_indice + 1) di @domandeArgomento.Count</h5>
+        <p>@domandeArgomento[_indice].DomandaQuiz</p>
+    }
+</div>
+
+@code {
+    [Parameter] public int IdCapitolo { get; set; }
+    [Parameter] public List<Domanda> ListaDomande { get; set; }
+    [Parameter] public List<Suggerimento> listaSuggerimenti { get; set; }
+
+    private List<Domanda> domandeSelezionateQuiz; // <--QUUAAAAAAAAA
+    private List<Domanda> domandeArgomento;
+    private List<Suggerimento> suggerimentiCorrenti;
+
+    private int _indice = 0;
+    private bool _risposto = false;
+    private bool _corretto = false;
+    private string _messaggio = "";
+
+    protected override void OnParametersSet()
+    {
+        domandeArgomento = ListaDomande
+            .Where(d => d.Id_Capitolo == IdCapitolo)
+            .ToList();
+
+        CaricaSuggerimenti();
+    }
+
+    //Da implementare e sostituire dove ce il commento!
+    @* public List<Domanda> CreaSchedaQuiz()
+    {
+
+    } *@
+
+    private void CaricaSuggerimenti()
+    {
+        Domanda domanda = domandeArgomento[_indice];
+
+        suggerimentiCorrenti = listaSuggerimenti
+            .Where(s => s.Id == domanda.Teoria)
+            .ToList();
+    }
+
+    private void SelezionaSuggerimento(Suggerimento s)
+    {
+        _risposto = true;
+        _corretto = s.Risultato.ToLower() == "true";
+    }
+
+    private void Avanti()
+    {
+        _indice++;
+        _risposto = false;
+
+        if (_indice < domandeArgomento.Count)
+            CaricaSuggerimenti();
+    }
+}

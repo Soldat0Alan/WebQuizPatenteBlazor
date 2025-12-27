@@ -1,33 +1,45 @@
 @page "/quiz-per-argomento"
 @using Patente
+@inject List<Argomento> listaArgomenti
+@inject List<Domanda> listaDomande
+@inject List<Suggerimento> listaSuggerimenti
 
 <PageTitle>Quiz per argomento</PageTitle>
 
-<h1>Sezione quiz per argomento!</h1>
-
-<p>Usando il menu a tendina scegli l'argomento a tuo piacimento.</p>
-
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle"type="button"id="dropdownMenuButton"data-bs-toggle="dropdown"aria-expanded="false">
-    Seleziona l'argomento
-</button>
-
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    @foreach (Argomento argomento in listaArgomenti)
-    {
-        <b> <a class="dropdown-item">@argomento.ToString()</a></b>
-       
-    }
-  </div>
+<div class="text-center mx-auto">
+  <h1 class="m">Sezione quiz per argomento!</h1>
+  <p>In questa pagina potrai selezionare un argomento a tuo piacimento su cui potrai esercitarti!.</p>
 </div>
-    
 
+<hr/>
 
-<hr>
+<div class="container-fluid ">
+    <div class="row align-items-stretch g-3"> 
+        @foreach (Argomento argomento in listaArgomenti)
+        {
+            <div class="col-12 col-md-6 col-lg-2"> 
+                <div class="card p-3 h-100"><img src="logoProvvisorio.jpg" class="card-img-top" alt="Immagine Capitolo @argomento.IdCapitolo">
+                    <div class="card-body">
+                        <p class="card-text">@argomento.Descrizione</p>
+                    </div>
+                <a class="btn btn-success" href="/quiz?IdCapitolo=@argomento.IdCapitolo">
+                    Vai a Sezione
+                </a>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<hr/>
+
 @code{
-    List<Argomento> listaArgomenti;
+
     protected override void OnInitialized()
     {
         listaArgomenti = GestioneJson.LeggiFileArgomento();
+        listaDomande = GestioneJson.LeggiFileDomande();
+        listaSuggerimenti = GestioneJson.LeggiFileSuggerimenti();
     }
 }

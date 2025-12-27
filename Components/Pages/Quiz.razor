@@ -1,0 +1,31 @@
+@page "/quiz"
+@using Components.Aggiuntivi;
+@using WebPatenteQuiz.Components.Aggiuntivi;
+<PageTitle>Quiz per argomento</PageTitle>
+
+@if (IdCapitolo == null)
+{
+    <p>Argomento non valido. Torna alla lista degli argomenti.</p>
+}
+else
+{
+    <SchedaQuiz 
+        IdCapitolo="@IdCapitolo.Value"
+        ListaDomande="listaDomande"
+        ListaSuggerimenti="listaSuggerimenti"/>
+}
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int? IdCapitolo { get; set; }
+
+    List<Domanda> listaDomande;
+    List<Suggerimento> listaSuggerimenti;
+
+    protected override void OnInitialized()
+    {
+        listaDomande = GestioneJson.LeggiFileDomande();
+        listaSuggerimenti = GestioneJson.LeggiFileSuggerimenti();
+    }
+}
