@@ -26,7 +26,8 @@
                             <div class="btn-group me-2" role="group">
                                 @for(int i=0; i<10;i++)
                                 {
-                                    <button type="button" class="btn btn-outline-secondary" @onclick="() => VaiADomandaSpecifica(i+numDomandaIniziale)">@(numDomandaIniziale+i)</button>
+                                    int indiceCorrente = i;
+                                    <button type="button" class="btn btn-outline-secondary" @onclick="() => VaiADomandaSpecifica(indiceCorrente+numDomandaIniziale)">@(numDomandaIniziale+indiceCorrente)</button>
                                 }
                             </div>
                         </div>
@@ -56,6 +57,7 @@
     private decimal _lunghezzaBarraAvanzamento ;
     RangeQuiz rangeQuizAttuale= RangeQuiz.Uno_Dieci;
     int numDomandaIniziale =1;
+
     protected override void OnParametersSet()
     {
         IEnumerable<Domanda>? tutteDomandeCapitolo = ListaDomande.Where(d => d.Id_Capitolo == IdCapitolo);
@@ -70,6 +72,7 @@
         {
             _indice +=1;
             _lunghezzaBarraAvanzamento  += 3.33m;
+            AggiornaBarra();
         }
     }
 
@@ -79,15 +82,14 @@
         {
             _indice -=1;
             _lunghezzaBarraAvanzamento  -= 3.33m;
+            AggiornaBarra();
         }
     }
 
     public void VaiADomandaSpecifica(int i)
     {
-        //Console.WriteLine(numDomandaIniziale);
-        Console.WriteLine(i);
-        _indice = i-1-10;
-        Console.WriteLine(_indice);
+        _indice = i-1;
+        AggiornaBarra();
     }
 
     public void CambiaRangeQuiz(RangeQuiz rangeQuiz)
@@ -103,5 +105,10 @@
         {
             numDomandaIniziale=21;
         }
+    }
+
+    public void AggiornaBarra()
+    {
+        _lunghezzaBarraAvanzamento= (_indice+1) * 3.34m;
     }
 }
