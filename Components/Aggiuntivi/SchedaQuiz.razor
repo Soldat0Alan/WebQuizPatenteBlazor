@@ -12,14 +12,14 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <img src="/images/@(domandeSchedaQuiz[_indice].Immagine).gif" class="card card-img-top" alt="Immagine quiz">                
+                        <img src="/images/@(domandeSchedaQuiz[_indice].Immagine.ToString("000")).gif" class="card card-img-top" alt="Immagine quiz">                
                     </div>
 
                     <div class=" col">
                         <div class="btn-group w-100 mb-2">
-                            <button type="button" class="btn btn-outline-secondary" @onclick="() => CambiaRangeQuiz(RangeQuiz.Uno_Dieci)">1-10</button>
-                            <button type="button" class="btn btn-outline-secondary" @onclick="() => CambiaRangeQuiz(RangeQuiz.Undici_Venti)">11-20</button>
-                            <button type="button" class="btn btn-outline-secondary" @onclick="() => CambiaRangeQuiz(RangeQuiz.Ventuno_Trenta)">21-30</button>
+                            <button type="button" class="btn btn-outline-dark data-bs-toggle="button" @onclick="()  => CambiaRangeQuiz(RangeQuiz.Uno_Dieci)">1-10 </button>
+                            <button type="button" class="btn btn-outline-dark" @onclick="() => CambiaRangeQuiz(RangeQuiz.Undici_Venti)">11-20</button>
+                            <button type="button" class="btn btn-outline-dark" @onclick="() => CambiaRangeQuiz(RangeQuiz.Ventuno_Trenta)">21-30</button>
                         </div>
                        
                         <div class="btn-toolbar mb-3 d-flex justify-content-center" role="toolbar">
@@ -43,6 +43,8 @@
                     </div>
                 </div>
                 </div>                
+            }else{
+                <div>Finito!!</div>
             }
         </div>
 
@@ -71,7 +73,7 @@
         if(_indice<=29)
         {
             _indice +=1;
-            _lunghezzaBarraAvanzamento  += 3.33m;
+            _lunghezzaBarraAvanzamento  += 3.34m;
             AggiornaBarra();
         }
     }
@@ -81,7 +83,7 @@
         if(_indice>=1)
         {
             _indice -=1;
-            _lunghezzaBarraAvanzamento  -= 3.33m;
+            _lunghezzaBarraAvanzamento  -= 3.34m;
             AggiornaBarra();
         }
     }
@@ -109,6 +111,10 @@
 
     public void AggiornaBarra()
     {
-        _lunghezzaBarraAvanzamento= (_indice+1) * 3.34m;
+        if(_lunghezzaBarraAvanzamento<100m)
+        {
+             _lunghezzaBarraAvanzamento = (_indice+1) * 3.34m;
+        }
+       
     }
 }
