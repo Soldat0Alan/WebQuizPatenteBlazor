@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebPatenteQuiz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2364f8a76b5d243be146bf0b929772c0e9e2f095")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9bf5e7f432736ee43406591ac96fa752216101eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebPatenteQuiz")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebPatenteQuiz")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
