@@ -1,8 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "A6lyNIPAZ0o=",
+  "dgSpecHash": "RVrcpYxcN+k=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Andrea\\Desktop\\WebQuizPatente\\WebQuizPatenteBlazor\\WebQuizPatenteBlazor\\WebPatenteQuiz.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\ProgettoTotemBlazor\\QuizPatenteBlazor\\WebQuizPatenteBlazor\\WebPatenteQuiz.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alan\\.nuget\\packages\\bit.butil\\10.3.0\\bit.butil.10.3.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.authorization\\9.0.0\\microsoft.aspnetcore.authorization.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.components\\9.0.0\\microsoft.aspnetcore.components.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\9.0.0\\microsoft.aspnetcore.components.analyzers.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\9.0.0\\microsoft.aspnetcore.components.forms.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.components.web\\9.0.0\\microsoft.aspnetcore.components.web.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.metadata\\9.0.0\\microsoft.aspnetcore.metadata.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.0\\microsoft.extensions.dependencyinjection.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.0\\microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.0\\microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.extensions.options\\9.0.0\\microsoft.extensions.options.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.0\\microsoft.extensions.primitives.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.jsinterop\\9.0.0\\microsoft.jsinterop.9.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

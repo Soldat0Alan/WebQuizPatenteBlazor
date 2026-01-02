@@ -1,5 +1,7 @@
 using WebPatenteQuiz.Components;
 using Patente;
+using Bit.Butil;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +13,9 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<List<Argomento>>();
 builder.Services.AddScoped<List<Domanda>>();
 builder.Services.AddScoped<List<Suggerimento>>();
+
+builder.Services.AddBitButilServices();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

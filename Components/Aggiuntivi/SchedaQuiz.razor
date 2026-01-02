@@ -1,15 +1,23 @@
 @using Patente
 @using System.Linq
-@using System.Globalization;
+@using System.Globalization
+@using System.Reflection.Metadata
+
+@inject Bit.Butil.Document document
+@inject Microsoft.JSInterop.IJSRuntime js
 @rendermode InteractiveServer
 
         <div class="card container p-3 mx-auto justify-content-center container-fluid " style="width:1920px; height:720px; position: relative; ">
             
-            @if(_indice < domandeSchedaQuiz.Count){
+            @if(Time != "00:00")
+            {
+        
+                 @if(_indice < domandeSchedaQuiz.Count){
                 
                 <div class="progress mb-4">
                     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: @_lunghezzaBarraAvanzamento.ToString(CultureInfo.InvariantCulture)%" aria-valuenow="@_lunghezzaBarraAvanzamento.ToString(CultureInfo.InvariantCulture)" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
+                
                 <div class="row">
                     <div class="col">
                         <img src="/images/@(domandeSchedaQuiz[_indice].Immagine.ToString("000")).gif" class="card card-img-top" alt="Immagine quiz">                
@@ -33,7 +41,9 @@
                                 }
                             </div>
                         </div>
-                        <h5 class="card-title text-center ">Domanda @(_indice + 1) di @domandeSchedaQuiz.Count</h5>
+                        <hr>
+                        <h1 class="text-center mb-2">@Time</h1> 
+                        <h4 class="card-title text-center ">Domanda @(_indice + 1) di @domandeSchedaQuiz.Count</h4>
                         <div class="card-body">     
                             <p class="card-text text-center">@domandeSchedaQuiz[_indice].DomandaQuiz</p>
                             
@@ -45,10 +55,13 @@
                             </div>      
                     </div>
                 </div>
-                </div>                
-            }else{
-                <div>Finito!!</div>
+                </div>      
+                
+                }
+
+                
             }
+
         </div>
 
 @code {
@@ -59,7 +72,7 @@
     private List<Domanda> domandeSchedaQuiz = new List<Domanda>();
     private List<Suggerimento> suggerimentiCorrenti;
     private int _indice = 0;
-    private decimal _lunghezzaBarraAvanzamento =3.34m;
+    private decimal _lunghezzaBarraAvanzamento =3.34m; 
     RangeQuiz rangeQuizAttuale= RangeQuiz.Uno_Dieci;
     int numDomandaIniziale =1;
 
@@ -67,13 +80,43 @@
     int indiceBtnSelezionato = 0; 
     int indiceBtnRangeSelezionato = 0; 
 
+    //Per timer
+    
+    private System.Threading.Timer? _quizTimer;
+    private int _remainingSeconds = 1800;
+    string Time { get; set; } = "00:00";
+
+    private void StartTimer()
+    {
+        _quizTimer = new System.Threading.Timer(_ =>
+        {
+            InvokeAsync(() =>
+            {
+                _remainingSeconds--;
+                if (_remainingSeconds <= 0) _quizTimer?.Dispose();
+                  Time = TimeSpan.FromSeconds(_remainingSeconds).ToString(@"mm\:ss");
+                StateHasChanged();
+            });
+        }, null, 1000, 1000);
+    }
+
+    private void PauseTimer() => _quizTimer?.Change(Timeout.Infinite, Timeout.Infinite);
+    private void ResumeTimer() => _quizTimer?.Change(0, 1000);
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+
     protected override void OnParametersSet()
     {
         IEnumerable<Domanda>? tutteDomandeCapitolo = ListaDomande.Where(d => d.Id_Capitolo == IdCapitolo);
 
         domandeSchedaQuiz = tutteDomandeCapitolo.OrderBy(x => Guid.NewGuid()).Take(30).ToList();
         _indice = 0;
+        
     }
+
 
     public void VaiAlProssimo()
     {
@@ -112,8 +155,6 @@
             CambiaRangeQuiz(RangeQuiz.Ventuno_Trenta);
         }
         AggiornaBarra();
-
-
     }
 
     public void CambiaRangeQuiz(RangeQuiz rangeQuiz)
@@ -133,11 +174,36 @@
             indiceBtnRangeSelezionato=2;
         }
         indiceBtnSelezionato=-1;
-        
     }
 
     public void AggiornaBarra()
     {
         _lunghezzaBarraAvanzamento = (_indice+1) * 3.34m;  
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            StartTimer();
+
+            await document.AddEventListener<object>("visibilitychange", (args) => _ = OnVisibilityChange(args));  
+                    
+        }
+    }
+
+    private async Task OnVisibilityChange(object args)
+    {
+        var isHidden = await js.InvokeAsync<bool>("eval", "document.hidden");
+        if (isHidden)
+        {
+            Console.WriteLine("Timer fermo!");
+            PauseTimer();
+        }
+        else
+        {
+            Console.WriteLine("Timer ripreso!");
+            ResumeTimer();
+        }
     }
 }
