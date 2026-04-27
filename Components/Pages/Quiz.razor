@@ -3,23 +3,27 @@
 <PageTitle>Quiz per argomento</PageTitle>
 @inject List<Domanda> listaDomande
 @inject List<Suggerimento> listaSuggerimenti
+@inject List<Argomento> listaArgomenti
 
-@if (IdCapitolo == null)
+@if (IdCapitolo == null || !listaArgomenti.Any(a => a.IdCapitolo == IdCapitolo) )
 {
-    <p>Argomento non valido. Torna alla lista degli argomenti.</p>
+    <p>L'argomento inserito non è esistente. Torna alla pagina dei <a href="quiz-per-argomento">Quiz Per Argomento</a>.</p>
 }
 else
 {
-    <SchedaQuiz 
-        IdCapitolo="@IdCapitolo.Value"
+    <SchedaQuiz
+        IdCapitolo="@IdCapitolo"
         ListaDomande="listaDomande"
         ListaSuggerimenti="listaSuggerimenti"/>
 }
 
 @code {
+
     [Parameter]
-    [SupplyParameterFromQuery]
-    public int? IdCapitolo { get; set; }
+    [SupplyParameterFromQuery(Name = "IdCapitolo")]
+    public string? IdCapitoloQuery { get; set; }
+    public int IdCapitolo => int.TryParse(IdCapitoloQuery, out int n) ? n : 0;
+
 }
 
 

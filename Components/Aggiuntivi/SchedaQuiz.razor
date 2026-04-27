@@ -3,13 +3,13 @@
 @using System.Globalization
 @using System.Reflection.Metadata
 @using BlazorBootstrap
-
 @inject Bit.Butil.Document document
 @inject Microsoft.JSInterop.IJSRuntime js
 @rendermode InteractiveServer
 
         <div class="card container p-3 mx-auto justify-content-center container-fluid " style="width:1920px; height:720px; position: relative; ">
-             <ConfirmDialog @ref="dialog" />
+            
+            <ConfirmDialog @ref="dialog" />
             @if(Time != "00:00")
             {
         
@@ -70,7 +70,12 @@
 
 @code {
 
-    [Parameter] public int IdCapitolo { get; set; }
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "IdCapitolo")]
+    public string? IdCapitoloQuery { get; set; }
+    [Parameter]
+    public int IdCapitolo { get; set; }
+
     [Parameter] public required List<Domanda> ListaDomande { get; set; }
     [Parameter] public required List<Suggerimento> listaSuggerimenti { get; set; }
     private List<Domanda> domandeSchedaQuiz = new List<Domanda>();
@@ -147,7 +152,6 @@
 
     public void VaiADomandaSpecifica(int i)
     {
-        System.Console.WriteLine("i:"+ i);
         _indice = i-1;
         int btnDaSalvare = _indice % 10;
 
@@ -161,9 +165,7 @@
             CambiaRangeQuiz(RangeQuiz.Ventuno_Trenta);
         }
 
-        System.Console.WriteLine("Selezionato: prima" + indiceBtnSelezionato + " " + numDomandaIniziale);
         indiceBtnSelezionato = btnDaSalvare;
-        System.Console.WriteLine("Selezionato: dopo" + indiceBtnSelezionato+ " " + numDomandaIniziale);
         AggiornaBarra();
     }
 
@@ -183,7 +185,7 @@
             numDomandaIniziale=21;
             indiceBtnRangeSelezionato=2;
         }
-        //indiceBtnSelezionato=-1; 
+        indiceBtnSelezionato=-1; 
     }
 
     public void AggiornaBarra()
@@ -222,7 +224,7 @@
     {
         if(_indice == 29)
         {
-            ConfirmDialogOptions? options = new ConfirmDialogOptions
+            ConfirmDialogOptions? opzioni = new ConfirmDialogOptions
             {
                 YesButtonText = "Si",
                 YesButtonColor = ButtonColor.Success,
@@ -234,7 +236,7 @@
             var confirmation = await dialog.ShowAsync(
                 title: "Termina Quiz",
                 message1: "Sei sicuro di voler terminare il quiz?",
-                confirmDialogOptions: options);
+                confirmDialogOptions: opzioni);
 
             if (confirmation)
             {
@@ -243,7 +245,7 @@
             }
             else
             {
-                // faccio nulla HAHAHAHAH.
+                // non faccio nulla HAHAHAHAH.
             }
         
         }else{
