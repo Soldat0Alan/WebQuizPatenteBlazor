@@ -1,7 +1,8 @@
 @page "/quiz"
-@using Components.Aggiuntivi;
 @using WebPatenteQuiz.Components.Aggiuntivi;
 <PageTitle>Quiz per argomento</PageTitle>
+@inject List<Domanda> listaDomande
+@inject List<Suggerimento> listaSuggerimenti
 
 @if (IdCapitolo == null)
 {
@@ -19,13 +20,6 @@ else
     [Parameter]
     [SupplyParameterFromQuery]
     public int? IdCapitolo { get; set; }
-
-    List<Domanda> listaDomande;
-    List<Suggerimento> listaSuggerimenti;
-
-    protected override void OnInitialized()
-    {
-        listaDomande = GestioneJson.LeggiFileDomande();
-        listaSuggerimenti = GestioneJson.LeggiFileSuggerimenti();
-    }
 }
+
+

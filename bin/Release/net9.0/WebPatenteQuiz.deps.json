@@ -1,0 +1,57 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "WebPatenteQuiz/1.0.0": {
+        "dependencies": {
+          "Bit.Butil": "10.3.0",
+          "Blazor.Bootstrap": "3.5.0"
+        },
+        "runtime": {
+          "WebPatenteQuiz.dll": {}
+        }
+      },
+      "Bit.Butil/10.3.0": {
+        "runtime": {
+          "lib/net9.0/Bit.Butil.dll": {
+            "assemblyVersion": "10.3.0.0",
+            "fileVersion": "10.3.0.0"
+          }
+        }
+      },
+      "Blazor.Bootstrap/3.5.0": {
+        "runtime": {
+          "lib/net9.0/BlazorBootstrap.dll": {
+            "assemblyVersion": "3.5.0.0",
+            "fileVersion": "3.5.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WebPatenteQuiz/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Bit.Butil/10.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-US6LHBbSDPoQULERnxRkAvqxZwgL3rJVzjUdcAnyCHHi7s1Mi3a+qoU6PoSqzqlJNcBxFCvDme1IU31vHK7eng==",
+      "path": "bit.butil/10.3.0",
+      "hashPath": "bit.butil.10.3.0.nupkg.sha512"
+    },
+    "Blazor.Bootstrap/3.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-26dwbF1z84v/e0zbUb+c58k7a4NBbdTselt5T766m0vqj7Pq0wWTokfu5C6svATCUppZm8eCS6+zIduaF7Wnwg==",
+      "path": "blazor.bootstrap/3.5.0",
+      "hashPath": "blazor.bootstrap.3.5.0.nupkg.sha512"
+    }
+  }
+}

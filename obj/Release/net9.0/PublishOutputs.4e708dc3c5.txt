@@ -1,0 +1,9 @@
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\WebPatenteQuiz.exe
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\appsettings.Development.json
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\appsettings.json
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\WebPatenteQuiz.dll
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\WebPatenteQuiz.deps.json
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\WebPatenteQuiz.runtimeconfig.json
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\WebPatenteQuiz.pdb
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\Bit.Butil.dll
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Release\net9.0\publish\BlazorBootstrap.dll

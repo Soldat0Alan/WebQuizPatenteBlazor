@@ -96,13 +96,12 @@
     {
         _quizTimer = new System.Threading.Timer(_ =>
         {
-            InvokeAsync(() =>
-            {
+            
                 _remainingSeconds--;
                 if (_remainingSeconds <= 0) _quizTimer?.Dispose();
                   Time = TimeSpan.FromSeconds(_remainingSeconds).ToString(@"mm\:ss");
-                StateHasChanged();
-            });
+                InvokeAsync(StateHasChanged);
+            
         }, null, 1000, 1000);
     }
 
@@ -223,7 +222,14 @@
     {
         if(_indice == 29)
         {
-            var options = new ConfirmDialogOptions { Size = size };
+            ConfirmDialogOptions? options = new ConfirmDialogOptions
+            {
+                YesButtonText = "Si",
+                YesButtonColor = ButtonColor.Success,
+                NoButtonText = "No",
+                NoButtonColor = ButtonColor.Danger,
+                Size = size
+            };
 
             var confirmation = await dialog.ShowAsync(
                 title: "Termina Quiz",
@@ -237,7 +243,7 @@
             }
             else
             {
-                // non terminarlo
+                // faccio nulla HAHAHAHAH.
             }
         
         }else{

@@ -12,7 +12,7 @@ namespace Patente
         public static List<Domanda> LeggiFileDomande()
         {
             string contenutoFile= File.ReadAllText("wwwroot/fileJson/domande.json");
-
+            Console.WriteLine("Tutte le domande sono state importate correttamente!");
             return JsonSerializer.Deserialize<List<Domanda>>(contenutoFile)!;
         }
 
@@ -23,8 +23,7 @@ namespace Patente
         public static List<Argomento> LeggiFileArgomento()
         {
             string contenutoFile= File.ReadAllText("wwwroot/fileJson/argomenti.json");
-            Console.WriteLine(contenutoFile);
-
+            Console.WriteLine("Tutti gli argomenti sono stati importati correttamente!");
             return JsonSerializer.Deserialize<List<Argomento>>(contenutoFile)!;
         }
            
@@ -35,7 +34,7 @@ namespace Patente
         public static List<Suggerimento> LeggiFileSuggerimenti()
         {
             string contenutoFile= File.ReadAllText("wwwroot/fileJson/hints.json");
-
+            Console.WriteLine("Tutti i suggerimenti sono stati importati correttamente!");
             return JsonSerializer.Deserialize<List<Suggerimento>>(contenutoFile)!;
         }
            

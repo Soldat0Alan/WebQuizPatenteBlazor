@@ -2,17 +2,24 @@ using WebPatenteQuiz.Components;
 using Patente;
 using Bit.Butil;
 
+//Carico i dati presi dal JSON solo all'avvio per non rallentare tutto.
+var domande = GestioneJson.LeggiFileDomande();
+var suggerimenti = GestioneJson.LeggiFileSuggerimenti();
+var argomenti = GestioneJson.LeggiFileArgomento();
+
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
 
     .AddInteractiveServerComponents();
-    
 
-builder.Services.AddScoped<List<Argomento>>();
-builder.Services.AddScoped<List<Domanda>>();
-builder.Services.AddScoped<List<Suggerimento>>();
+builder.Services.AddSingleton(domande);
+builder.Services.AddSingleton(suggerimenti);
+builder.Services.AddSingleton(argomenti);
+
 builder.Services.AddBlazorBootstrap();
 builder.Services.AddBitButilServices();
 
