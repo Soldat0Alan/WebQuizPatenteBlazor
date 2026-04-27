@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "RVrcpYxcN+k=",
+  "dgSpecHash": "L/FWu4OdjuU=",
   "success": true,
-  "projectFilePath": "D:\\ProgettoTotemBlazor\\QuizPatenteBlazor\\WebQuizPatenteBlazor\\WebPatenteQuiz.csproj",
+  "projectFilePath": "D:\\WebPatenteQuiz\\WebQuizPatenteBlazor\\WebPatenteQuiz.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alan\\.nuget\\packages\\bit.butil\\10.3.0\\bit.butil.10.3.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\blazor.bootstrap\\3.5.0\\blazor.bootstrap.3.5.0.nupkg.sha512",
     "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.authorization\\9.0.0\\microsoft.aspnetcore.authorization.9.0.0.nupkg.sha512",
     "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.components\\9.0.0\\microsoft.aspnetcore.components.9.0.0.nupkg.sha512",
     "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\9.0.0\\microsoft.aspnetcore.components.analyzers.9.0.0.nupkg.sha512",
@@ -16,7 +17,11 @@
     "C:\\Users\\Alan\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.0\\microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
     "C:\\Users\\Alan\\.nuget\\packages\\microsoft.extensions.options\\9.0.0\\microsoft.extensions.options.9.0.0.nupkg.sha512",
     "C:\\Users\\Alan\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.0\\microsoft.extensions.primitives.9.0.0.nupkg.sha512",
-    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.jsinterop\\9.0.0\\microsoft.jsinterop.9.0.0.nupkg.sha512"
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.jsinterop\\9.0.0\\microsoft.jsinterop.9.0.0.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.12\\microsoft.aspnetcore.app.ref.9.0.12.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\9.0.12\\microsoft.netcore.app.host.win-x64.9.0.12.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.12\\microsoft.netcore.app.ref.9.0.12.nupkg.sha512",
+    "C:\\Users\\Alan\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.12\\microsoft.windowsdesktop.app.ref.9.0.12.nupkg.sha512"
   ],
   "logs": []
 }

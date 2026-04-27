@@ -24,6 +24,24 @@
           "buildMultiTargeting/Bit.Butil.props": {}
         }
       },
+      "Blazor.Bootstrap/3.5.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "9.0.0"
+        },
+        "compile": {
+          "lib/net9.0/BlazorBootstrap.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0/BlazorBootstrap.dll": {}
+        },
+        "build": {
+          "buildTransitive/Blazor.Bootstrap.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Blazor.Bootstrap.props": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -247,6 +265,37 @@
         "lib/net9.0/Bit.Butil.pdb",
         "lib/net9.0/Bit.Butil.xml",
         "staticwebassets/bit-butil.js"
+      ]
+    },
+    "Blazor.Bootstrap/3.5.0": {
+      "sha512": "26dwbF1z84v/e0zbUb+c58k7a4NBbdTselt5T766m0vqj7Pq0wWTokfu5C6svATCUppZm8eCS6+zIduaF7Wnwg==",
+      "type": "package",
+      "path": "blazor.bootstrap/3.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "128X128.png",
+        "README.md",
+        "blazor.bootstrap.3.5.0.nupkg.sha512",
+        "blazor.bootstrap.nuspec",
+        "build/Blazor.Bootstrap.props",
+        "build/Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "buildMultiTargeting/Blazor.Bootstrap.props",
+        "buildTransitive/Blazor.Bootstrap.props",
+        "lib/net10.0/BlazorBootstrap.dll",
+        "lib/net6.0/BlazorBootstrap.dll",
+        "lib/net8.0/BlazorBootstrap.dll",
+        "lib/net9.0/BlazorBootstrap.dll",
+        "staticwebassets/Blazor.Bootstrap.olwso25aue.bundle.scp.css",
+        "staticwebassets/blazor.bootstrap.css",
+        "staticwebassets/blazor.bootstrap.js",
+        "staticwebassets/blazor.bootstrap.pdf.js",
+        "staticwebassets/blazor.bootstrap.sortable-list.js",
+        "staticwebassets/blazor.bootstrap.theme-switcher.js",
+        "staticwebassets/icon/128X128.png",
+        "staticwebassets/pdfjs-4.0.379.min.js",
+        "staticwebassets/pdfjs-4.0.379.worker.min.js"
       ]
     },
     "Microsoft.AspNetCore.Authorization/9.0.0": {
@@ -570,7 +619,8 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Bit.Butil >= 10.3.0"
+      "Bit.Butil >= 10.3.0",
+      "Blazor.Bootstrap >= 3.5.0"
     ]
   },
   "packageFolders": {
@@ -580,11 +630,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ProgettoTotemBlazor\\QuizPatenteBlazor\\WebQuizPatenteBlazor\\WebPatenteQuiz.csproj",
+      "projectUniqueName": "D:\\WebPatenteQuiz\\WebQuizPatenteBlazor\\WebPatenteQuiz.csproj",
       "projectName": "WebPatenteQuiz",
-      "projectPath": "D:\\ProgettoTotemBlazor\\QuizPatenteBlazor\\WebQuizPatenteBlazor\\WebPatenteQuiz.csproj",
+      "projectPath": "D:\\WebPatenteQuiz\\WebQuizPatenteBlazor\\WebPatenteQuiz.csproj",
       "packagesPath": "C:\\Users\\Alan\\.nuget\\packages\\",
-      "outputPath": "D:\\ProgettoTotemBlazor\\QuizPatenteBlazor\\WebQuizPatenteBlazor\\obj\\",
+      "outputPath": "D:\\WebPatenteQuiz\\WebQuizPatenteBlazor\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -618,7 +668,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -627,6 +677,10 @@
           "Bit.Butil": {
             "target": "Package",
             "version": "[10.3.0, )"
+          },
+          "Blazor.Bootstrap": {
+            "target": "Package",
+            "version": "[3.5.0, )"
           }
         },
         "imports": [
@@ -640,6 +694,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[9.0.12, 9.0.12]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -648,7 +720,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

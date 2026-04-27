@@ -2,64 +2,68 @@
 @using System.Linq
 @using System.Globalization
 @using System.Reflection.Metadata
+@using BlazorBootstrap
 
 @inject Bit.Butil.Document document
 @inject Microsoft.JSInterop.IJSRuntime js
 @rendermode InteractiveServer
 
         <div class="card container p-3 mx-auto justify-content-center container-fluid " style="width:1920px; height:720px; position: relative; ">
-            
+             <ConfirmDialog @ref="dialog" />
             @if(Time != "00:00")
             {
         
-                 @if(_indice < domandeSchedaQuiz.Count){
+                @if(_indice < domandeSchedaQuiz.Count)
+                {
                 
-                <div class="progress mb-4">
-                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: @_lunghezzaBarraAvanzamento.ToString(CultureInfo.InvariantCulture)%" aria-valuenow="@_lunghezzaBarraAvanzamento.ToString(CultureInfo.InvariantCulture)" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                
-                <div class="row">
-                    <div class="col">
-                        <img src="/images/@(domandeSchedaQuiz[_indice].Immagine.ToString("000")).gif" class="card card-img-top" alt="Immagine quiz">                
+                    <div class="progress mb-4">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: @_lunghezzaBarraAvanzamento.ToString(CultureInfo.InvariantCulture)%" aria-valuenow="@_lunghezzaBarraAvanzamento.ToString(CultureInfo.InvariantCulture)" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-
-                    <div class=" col">
-                        <div class="btn-group w-100 mb-2">
-                            <button type="button" class="btn btn-outline-dark  @(indiceBtnRangeSelezionato == 0 ? "btn-dark text-light"  : "btn-outline-dark text-dark")" @onclick="()  => CambiaRangeQuiz(RangeQuiz.Uno_Dieci)">1-10 </button>
-                            <button type="button" class="btn btn-outline-dark @(indiceBtnRangeSelezionato == 1 ? "btn-dark text-light" : "btn-outline-dark text-dark")" @onclick="() => CambiaRangeQuiz(RangeQuiz.Undici_Venti)">11-20</button>
-                            <button type="button" class="btn btn-outline-dark @(indiceBtnRangeSelezionato == 2 ? "btn-dark text-light" : "btn-outline-dark text-dark")" @onclick="() => CambiaRangeQuiz(RangeQuiz.Ventuno_Trenta)">21-30</button>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <img src="/images/@(domandeSchedaQuiz[_indice].Immagine.ToString("000")).gif" class="card card-img-top" alt="Immagine quiz">                
                         </div>
-                       
-                        <div class="btn-toolbar mb-3 d-flex justify-content-center" role="toolbar">
-                        
-                            <div class="btn-group me-2" role="group">
-                                @for(int i=0; i<10;i++)
-                                {
-                                    int indiceCorrente = i;
-                                    
-                                    <button type="button" class="btn btn-outline-secondary @(indiceBtnSelezionato == indiceCorrente ? "btn-secondary" : "btn-outline-secondary")" @onclick="() => VaiADomandaSpecifica(indiceCorrente+numDomandaIniziale)">@(numDomandaIniziale+indiceCorrente)</button>
-                                }
+
+                        <div class=" col">
+                            <div class="btn-group w-100 mb-2">
+                                <button type="button" class="btn btn-outline-dark  @(indiceBtnRangeSelezionato == 0 ? "btn-dark text-light"  : "btn-outline-dark text-dark")" @onclick="()  => CambiaRangeQuiz(RangeQuiz.Uno_Dieci)">1-10</button>
+                                <button type="button" class="btn btn-outline-dark @(indiceBtnRangeSelezionato == 1 ? "btn-dark text-light" : "btn-outline-dark text-dark")" @onclick="() => CambiaRangeQuiz(RangeQuiz.Undici_Venti)">11-20</button>
+                                <button type="button" class="btn btn-outline-dark @(indiceBtnRangeSelezionato == 2 ? "btn-dark text-light" : "btn-outline-dark text-dark")" @onclick="() => CambiaRangeQuiz(RangeQuiz.Ventuno_Trenta)">21-30</button>
                             </div>
-                        </div>
-                        <hr>
-                        <h1 class="text-center mb-2">@Time</h1> 
-                        <h4 class="card-title text-center ">Domanda @(_indice + 1) di @domandeSchedaQuiz.Count</h4>
-                        <div class="card-body">     
-                            <p class="card-text text-center">@domandeSchedaQuiz[_indice].DomandaQuiz</p>
+                        
+                            <div class="btn-toolbar mb-3 d-flex justify-content-center" role="toolbar">
                             
-                           <div class="d-flex justify-content-center gap-3" style="position: absolute; bottom: 200px; left: 65%;">
-                                <button class="p-0 border-0 bg-transparent "  @onclick="() => TornaAlPrecedente()"><i class="bi bi-arrow-left fs-3"></i></button>
-                                <button class="btn btn-outline-success btn-lg px-4 " @onclick="() => VaiAlProssimo()">Vero</button>
-                                <button class="btn btn-outline-danger btn-lg px-4" @onclick="() => VaiAlProssimo()">Falso</button>
-                                <button class="p-0 border-0 bg-transparent" @onclick="() => VaiAlProssimo()"><i class="bi bi-arrow-right fs-3"></i></button>
-                            </div>      
+                                <div class="btn-group me-2" role="group">
+                                    @for(int i=0; i<10;i++)
+                                    {
+                                        int indiceCorrente = i;
+                                    <button type="button" 
+                                                class="btn @(indiceBtnSelezionato == indiceCorrente ? "btn-dark text-light" : "btn-outline-secondary")" 
+                                                @onclick="() => { indiceBtnSelezionato = indiceCorrente; VaiADomandaSpecifica(indiceCorrente + numDomandaIniziale); }">
+                                            @(numDomandaIniziale + indiceCorrente)
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                            <hr>
+                            <h1 class="text-center mb-2">@Time</h1> 
+                            <h4 class="card-title text-center ">Domanda @(_indice + 1) di @domandeSchedaQuiz.Count</h4>
+                            <div class="card-body">     
+                                <p class="card-text text-center">@domandeSchedaQuiz[_indice].DomandaQuiz</p>
+                                
+                            <div class="d-flex justify-content-center gap-3" style="position: absolute; bottom: 200px; left: 65%;">
+                                    <button class="p-0 border-0 bg-transparent "  @onclick="() => TornaAlPrecedente()"><i class="bi bi-arrow-left fs-3"></i></button>
+                                    <button class="btn btn-outline-success btn-lg px-4 " @onclick="() => ShowConfirmationAsync(DialogSize.Regular)">Vero</button>
+                                    <button class="btn btn-outline-danger btn-lg px-4" @onclick="() => ShowConfirmationAsync(DialogSize.Regular)">Falso</button>
+                                    <button class="p-0 border-0 bg-transparent" @onclick="() => ShowConfirmationAsync(DialogSize.Regular)"><i class="bi bi-arrow-right fs-3"></i></button>
+                                </div>      
+                        </div>
                     </div>
-                </div>
-                </div>      
-                
+                    </div>
                 }
-
                 
+
             }
 
         </div>
@@ -75,16 +79,18 @@
     private decimal _lunghezzaBarraAvanzamento =3.34m; 
     RangeQuiz rangeQuizAttuale= RangeQuiz.Uno_Dieci;
     int numDomandaIniziale =1;
-
     //Serve per fare in modo che al click del bottone rimanga evidenziato il bottone cliccato.
-    int indiceBtnSelezionato = 0; 
+    int indiceBtnSelezionato = -1; 
     int indiceBtnRangeSelezionato = 0; 
 
     //Per timer
-    
     private System.Threading.Timer? _quizTimer;
-    private int _remainingSeconds = 1800;
+    private int _remainingSeconds = 1200;
     string Time { get; set; } = "00:00";
+
+
+    //Per la conferma di fine quiz.
+    private ConfirmDialog dialog = default!;
 
     private void StartTimer()
     {
@@ -114,6 +120,7 @@
 
         domandeSchedaQuiz = tutteDomandeCapitolo.OrderBy(x => Guid.NewGuid()).Take(30).ToList();
         _indice = 0;
+        VaiADomandaSpecifica(1);
         
     }
 
@@ -141,19 +148,23 @@
 
     public void VaiADomandaSpecifica(int i)
     {
+        System.Console.WriteLine("i:"+ i);
         _indice = i-1;
-        indiceBtnSelezionato=_indice;
-        Console.WriteLine(indiceBtnSelezionato);
+        int btnDaSalvare = _indice % 10;
 
-        if(indiceBtnSelezionato >=0 && indiceBtnSelezionato <=9 )
+        if(_indice >=0 && _indice <=9 )
         {
             CambiaRangeQuiz(RangeQuiz.Uno_Dieci);
-        }else if (indiceBtnSelezionato >9 && indiceBtnSelezionato <=19)
+        }else if (_indice >9 && _indice <=19)
         {
             CambiaRangeQuiz(RangeQuiz.Undici_Venti);
         }else{
             CambiaRangeQuiz(RangeQuiz.Ventuno_Trenta);
         }
+
+        System.Console.WriteLine("Selezionato: prima" + indiceBtnSelezionato + " " + numDomandaIniziale);
+        indiceBtnSelezionato = btnDaSalvare;
+        System.Console.WriteLine("Selezionato: dopo" + indiceBtnSelezionato+ " " + numDomandaIniziale);
         AggiornaBarra();
     }
 
@@ -173,7 +184,7 @@
             numDomandaIniziale=21;
             indiceBtnRangeSelezionato=2;
         }
-        indiceBtnSelezionato=-1;
+        //indiceBtnSelezionato=-1; 
     }
 
     public void AggiornaBarra()
@@ -186,7 +197,7 @@
         if (firstRender)
         {
             StartTimer();
-
+        
             await document.AddEventListener<object>("visibilitychange", (args) => _ = OnVisibilityChange(args));  
                     
         }
@@ -205,5 +216,33 @@
             Console.WriteLine("Timer ripreso!");
             ResumeTimer();
         }
+    }
+
+
+    private async Task ShowConfirmationAsync(DialogSize size)
+    {
+        if(_indice == 29)
+        {
+            var options = new ConfirmDialogOptions { Size = size };
+
+            var confirmation = await dialog.ShowAsync(
+                title: "Termina Quiz",
+                message1: "Sei sicuro di voler terminare il quiz?",
+                confirmDialogOptions: options);
+
+            if (confirmation)
+            {
+                VaiAlProssimo();
+                
+            }
+            else
+            {
+                // non terminarlo
+            }
+        
+        }else{
+            VaiAlProssimo();
+        }
+        
     }
 }

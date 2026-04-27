@@ -13,7 +13,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<List<Argomento>>();
 builder.Services.AddScoped<List<Domanda>>();
 builder.Services.AddScoped<List<Suggerimento>>();
-
+builder.Services.AddBlazorBootstrap();
 builder.Services.AddBitButilServices();
 
 var app = builder.Build();
