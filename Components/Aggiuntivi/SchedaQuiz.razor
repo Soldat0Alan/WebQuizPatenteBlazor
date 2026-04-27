@@ -71,10 +71,10 @@
 @code {
 
     [Parameter] public int IdCapitolo { get; set; }
-    [Parameter] public List<Domanda> ListaDomande { get; set; }
-    [Parameter] public List<Suggerimento> listaSuggerimenti { get; set; }
+    [Parameter] public required List<Domanda> ListaDomande { get; set; }
+    [Parameter] public required List<Suggerimento> listaSuggerimenti { get; set; }
     private List<Domanda> domandeSchedaQuiz = new List<Domanda>();
-    private List<Suggerimento> suggerimentiCorrenti;
+    public required List<Suggerimento> suggerimentiCorrenti;
     private int _indice = 0;
     private decimal _lunghezzaBarraAvanzamento =3.34m; 
     RangeQuiz rangeQuizAttuale= RangeQuiz.Uno_Dieci;
