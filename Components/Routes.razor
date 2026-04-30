@@ -1,6 +1,17 @@
-﻿<Router AppAssembly="typeof(Program).Assembly">
+﻿@using WebPatenteQuiz.Components.Layout
+@using WebPatenteQuiz.Components.Pages
+<Router AppAssembly="typeof(Program).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
+  <Found Context="routeData">
+    <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)" />
+  </Found>
+  <NotFound>
+    <PageTitle>Not found</PageTitle>
+    <LayoutView Layout="@typeof(MainLayout)">
+      <ContenutoNonTrovato />
+    </LayoutView>
+  </NotFound>
 </Router>
