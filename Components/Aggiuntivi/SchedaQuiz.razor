@@ -12,10 +12,8 @@
             <ConfirmDialog @ref="dialog" />
             @if(Time != "00:00")
             {
-        
                 @if(_indice < domandeSchedaQuiz.Count)
                 {
-                
                     <div class="progress mb-4">
                         <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: @_lunghezzaBarraAvanzamento.ToString(CultureInfo.InvariantCulture)%" aria-valuenow="@_lunghezzaBarraAvanzamento.ToString(CultureInfo.InvariantCulture)" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -54,18 +52,22 @@
                                 
                             <div class="d-flex justify-content-center gap-3" style="position: absolute; bottom: 200px; left: 65%;">
                                     <button class="p-0 border-0 bg-transparent "  @onclick="() => TornaAlPrecedente()"><i class="bi bi-arrow-left fs-3"></i></button>
-                                    <button class="btn btn-outline-success btn-lg px-4 " @onclick="() => ShowConfirmationAsync(DialogSize.Regular)">Vero</button>
-                                    <button class="btn btn-outline-danger btn-lg px-4" @onclick="() => ShowConfirmationAsync(DialogSize.Regular)">Falso</button>
-                                    <button class="p-0 border-0 bg-transparent" @onclick="() => ShowConfirmationAsync(DialogSize.Regular)"><i class="bi bi-arrow-right fs-3"></i></button>
+                                    <button class="btn btn-outline-success btn-lg px-4 " @onclick="() => SalvaRisposta(1)">Vero</button>
+                                    <button class="btn btn-outline-danger btn-lg px-4" @onclick="() => SalvaRisposta(0)">Falso</button>
+                                    <button class="p-0 border-0 bg-transparent" @onclick="() => VaiAlProssimo()"><i class="bi bi-arrow-right fs-3"></i></button>
                                 </div>      
                         </div>
                     </div>
                     </div>
                 }
-                
-
+                else
+                {
+                    @if(ControllaEsitoFinale())
+                    {
+                        <h1>Sei stato promosso!!</h1>
+                    } else {<h1>Sei stato bocciato!!</h1>}   
+                }
             }
-
         </div>
 
 @code {
@@ -84,6 +86,7 @@
     private decimal _lunghezzaBarraAvanzamento =3.34m; 
     RangeQuiz rangeQuizAttuale= RangeQuiz.Uno_Dieci;
     int numDomandaIniziale =1;
+
     //Serve per fare in modo che al click del bottone rimanga evidenziato il bottone cliccato.
     int indiceBtnSelezionato = -1; 
     int indiceBtnRangeSelezionato = 0; 
@@ -93,6 +96,8 @@
     private int _remainingSeconds = 1200;
     string Time { get; set; } = "00:00";
 
+    //Per le risposte date dall'utente.
+    private List<int> risposteUtenteSchedaQuiz = Enumerable.Repeat(-1, 30).ToList();
 
     //Per la conferma di fine quiz.
     private ConfirmDialog dialog = default!;
@@ -101,12 +106,11 @@
     {
         _quizTimer = new System.Threading.Timer(_ =>
         {
-            
-                _remainingSeconds--;
-                if (_remainingSeconds <= 0) _quizTimer?.Dispose();
-                  Time = TimeSpan.FromSeconds(_remainingSeconds).ToString(@"mm\:ss");
-                InvokeAsync(StateHasChanged);
-            
+            _remainingSeconds--;
+            if (_remainingSeconds <= 0) _quizTimer?.Dispose();
+            Time = TimeSpan.FromSeconds(_remainingSeconds).ToString(@"mm\:ss");
+            InvokeAsync(StateHasChanged);
+
         }, null, 1000, 1000);
     }
 
@@ -115,7 +119,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        
+
     }
 
     protected override void OnParametersSet()
@@ -125,16 +129,29 @@
         domandeSchedaQuiz = tutteDomandeCapitolo.OrderBy(x => Guid.NewGuid()).Take(30).ToList();
         _indice = 0;
         VaiADomandaSpecifica(1);
-        
     }
 
-
-    public void VaiAlProssimo()
+    /// <summary>
+    /// Salvi la risposta passata all'interno di "risposteUtenteSchedaQuiz". 1 => Vero, 0=> Falso, -1 Non Risposto
+    /// </summary>
+    /// <param name="risp"></param>
+    public void SalvaRisposta(int risp)
     {
-        if(_indice<=29)
+        risposteUtenteSchedaQuiz[_indice] = risp;
+        //Passo alla domanda successiva
+        VaiAlProssimo();
+    }
+
+    public async void VaiAlProssimo()
+    {
+        if(_indice == 29)
+        {
+            //Se sono arrivato all'ultima domanda quando clicco per avanzare faccio apparire popup di conferma.
+            await ShowConfirmationAsync(DialogSize.Regular);
+
+        }else
         {
             VaiADomandaSpecifica(_indice+2);
-
             _lunghezzaBarraAvanzamento  += 3.34m;
             AggiornaBarra();
         }
@@ -152,6 +169,7 @@
 
     public void VaiADomandaSpecifica(int i)
     {
+
         _indice = i-1;
         int btnDaSalvare = _indice % 10;
 
@@ -198,12 +216,11 @@
         if (firstRender)
         {
             StartTimer();
-        
+
             await document.AddEventListener<object>("visibilitychange", (args) => _ = OnVisibilityChange(args));  
-                    
+
         }
     }
-
     private async Task OnVisibilityChange(object args)
     {
         var isHidden = await js.InvokeAsync<bool>("eval", "document.hidden");
@@ -219,12 +236,9 @@
         }
     }
 
-
     private async Task ShowConfirmationAsync(DialogSize size)
     {
-        if(_indice == 29)
-        {
-            ConfirmDialogOptions? opzioni = new ConfirmDialogOptions
+        ConfirmDialogOptions? opzioni = new ConfirmDialogOptions
             {
                 YesButtonText = "Si",
                 YesButtonColor = ButtonColor.Success,
@@ -233,24 +247,38 @@
                 Size = size
             };
 
-            var confirmation = await dialog.ShowAsync(
-                title: "Termina Quiz",
-                message1: "Sei sicuro di voler terminare il quiz?",
-                confirmDialogOptions: opzioni);
+        var confirmation = await dialog.ShowAsync(
+            title: "Termina Quiz",
+            message1: "Sei sicuro di voler terminare il quiz?",
+            confirmDialogOptions: opzioni);
 
-            if (confirmation)
+        if (confirmation)
+        {
+            _indice = 30;
+        } 
+    }
+
+    /// <summary>
+    /// Controllo esito finale del quiz. 
+    /// </summary>
+    /// <returns>true se è stato promosso, false se è stato bocciato.</returns>
+    private bool ControllaEsitoFinale()
+    {
+        int rispGiuste=0;
+
+        for (int i = 0; i < domandeSchedaQuiz.Count; i++)
+        {
+            if(risposteUtenteSchedaQuiz[i] == domandeSchedaQuiz[i].RispostaQuiz)
             {
-                VaiAlProssimo();
-                
+                rispGiuste +=1;
             }
-            else
-            {
-                // non faccio nulla HAHAHAHAH.
-            }
-        
-        }else{
-            VaiAlProssimo();
         }
-        
+
+        if(rispGiuste>=27)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
