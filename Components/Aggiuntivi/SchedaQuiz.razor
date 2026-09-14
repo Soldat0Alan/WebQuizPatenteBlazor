@@ -7,7 +7,12 @@
 @inject Microsoft.JSInterop.IJSRuntime js
 @rendermode InteractiveServer
 
-        <div class="card container p-3 mx-auto justify-content-center container-fluid " style="width:1920px; height:720px; position: relative; ">
+    <div class="d-flex align-items-start">
+    <button type="button" class="p-0 border-0 bg-transparent text-dark mt-2 justify-content-center" onclick=history.back(); title="Torna indietro">
+        <i class="bi bi-arrow-90deg-left fs-3"></i>
+    </button>
+
+     <div class="card container p-3 mx-auto justify-content-center container-fluid " style="width:1920px; height:720px; position: relative; ">
             
             <ConfirmDialog @ref="dialog" />
             @if(Time != "00:00")
@@ -51,11 +56,24 @@
                                 <p class="card-text text-center">@domandeSchedaQuiz[_indice].DomandaQuiz</p>
                                 
                             <div class="d-flex justify-content-center gap-3" style="position: absolute; bottom: 200px; left: 65%;">
-                                    <button class="p-0 border-0 bg-transparent "  @onclick="() => TornaAlPrecedente()"><i class="bi bi-arrow-left fs-3"></i></button>
-                                    <button class="btn btn-outline-success btn-lg px-4 " @onclick="() => SalvaRisposta(1)">Vero</button>
-                                    <button class="btn btn-outline-danger btn-lg px-4" @onclick="() => SalvaRisposta(0)">Falso</button>
-                                    <button class="p-0 border-0 bg-transparent" @onclick="() => VaiAlProssimo()"><i class="bi bi-arrow-right fs-3"></i></button>
-                                </div>      
+                                <button class="p-0 border-0 bg-transparent" @onclick="() => TornaAlPrecedente()">
+                                    <i class="bi bi-arrow-left fs-3"></i>
+                                </button>
+
+                                <button class="btn @(risposteUtenteSchedaQuiz[_indice] == 1 ? "btn-success" : "btn-outline-success") btn-lg px-4" 
+                                        @onclick="() => SalvaRisposta(1)">
+                                    Vero
+                                </button>
+
+                                <button class="btn @(risposteUtenteSchedaQuiz[_indice] == 0 ? "btn-danger" : "btn-outline-danger") btn-lg px-4" 
+                                        @onclick="() => SalvaRisposta(0)">
+                                    Falso
+                                </button>
+
+                                <button class="p-0 border-0 bg-transparent" @onclick="() => VaiAlProssimo()">
+                                    <i class="bi bi-arrow-right fs-3"></i>
+                                </button>
+                            </div>  
                         </div>
                     </div>
                     </div>
@@ -69,6 +87,11 @@
                 }
             }
         </div>
+
+
+    </div>
+       
+    
 
 @code {
 

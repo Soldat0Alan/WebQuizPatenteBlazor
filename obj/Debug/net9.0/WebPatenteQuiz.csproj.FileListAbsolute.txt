@@ -283,7 +283,6 @@ D:\ProgettoTotemBlazor\QuizPatenteBlazor\WebQuizPatenteBlazor\obj\Debug\net9.0\W
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\bin\Debug\net9.0\Bit.Butil.dll
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\WebPatenteQuiz.csproj.AssemblyReference.cache
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\swg7nhendu-{0}-04ubqg3vlr-04ubqg3vlr.gz
-D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\ot39832q1h-{0}-khy4lop6wu-khy4lop6wu.gz
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\h5912r1gfu-{0}-5ua8zyjbv3-5ua8zyjbv3.gz
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\l9edsvatu2-{0}-4vbezdtu02-4vbezdtu02.gz
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\5c3vi12neh-{0}-x9n6flog5e-x9n6flog5e.gz
@@ -344,3 +343,4 @@ D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\36w3eu0hkb-{0
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\mfzx4sb2rv-{0}-79hai7knhw-79hai7knhw.gz
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\8kf3rcg0xy-{0}-olwso25aue-olwso25aue.gz
 D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\b6waaajwru-{0}-ny17bl8h7q-ny17bl8h7q.gz
+D:\WebPatenteQuiz\WebQuizPatenteBlazor\obj\Debug\net9.0\compressed\ot39832q1h-{0}-xpgb2lby7x-xpgb2lby7x.gz

@@ -1,7 +1,16 @@
 ﻿@page "/"
-
+@inject IJSRuntime JSRuntime
 <PageTitle>Home</PageTitle>
 
 <p class="mb-4">Benvenuto nel mondo dei quiz!</p>
 
 <img src="/car-explosion.gif" alt="">
+
+@code 
+{
+    private async Task GoBack()
+    {
+        await JSRuntime.InvokeVoidAsync("history.back");
+    }
+
+}
